@@ -1,0 +1,13 @@
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\bin\Debug\Inventory Management System (BFM1).exe.config
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\bin\Debug\Inventory Management System (BFM1).exe
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\bin\Debug\Inventory Management System (BFM1).pdb
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.Properties.Resources.resources
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory Management System (BFM1).csproj.GenerateResource.cache
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory Management System (BFM1).csproj.CoreCompileInputs.cache
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory Management System (BFM1).exe
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory Management System (BFM1).pdb
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.MainScreen.resources
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.AddPartScreen.resources
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory Management System (BFM1).csprojAssemblyReference.cache
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.AddProductScreen.resources
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.ModifyPartScreen.resources
