@@ -42,6 +42,11 @@ namespace Inventory_Management_System__BFM1_
             var product = Inventory.Products.SingleOrDefault(p => p.ProductID == productID);
             return product;
         }
+        public static Product lookupPart(int partID)
+        {
+            var part = Inventory.AllParts.SingleOrDefault(p => p.PartID == partID);
+            return part;
+        }
         public static void updateProduct(int productID, Product product)
         {
             // define
@@ -68,11 +73,6 @@ namespace Inventory_Management_System__BFM1_
         public static bool deletePart(Product part)
         {
             return AllParts.Remove(part) ? true : false;
-        }
-        public static Product lookupPart(int partID)
-        {
-            var part = Inventory.AllParts.SingleOrDefault(p => p.PartID == partID);
-            return part;
         }
         public static void updatePart(int partID, Part part)
         {

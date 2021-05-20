@@ -68,13 +68,15 @@ namespace Inventory_Management_System__BFM1_
             if (ValidateInput())
             {
                 var id = int.Parse(partid.Text);
+                // flag this check will always return true, because we already selected an existing partid to open the modify  window
+                // the logic needs to be updated to import input values into the selected product object belonging to partid
                 if (Inventory_Management_System__BFM1_.Inventory.AllParts.Contains(Inventory_Management_System__BFM1_.Inventory.lookupPart(id)))
                 {
                     // product already exists
                     MessageBox.Show($"Product already exists, adding Inventory field to Instock quantity.");
                     Inventory_Management_System__BFM1_.Inventory.lookupPart(id).InStock += int.Parse(Inventory.Text);
                     var mainscreen = Application.OpenForms[0] as MainScreen;
-                    mainscreen.UpdateRefresh();
+                    mainscreen.UpdateRefreshParts();
                     this.Close();
                     return;
                 }
@@ -104,7 +106,6 @@ namespace Inventory_Management_System__BFM1_
                 {
                     textBox.Focus();
 
-                    // remove "txt" prefix:
                     if (textBox.Name == "textBox6")
                     {
                         var fieldName = label7.Text;

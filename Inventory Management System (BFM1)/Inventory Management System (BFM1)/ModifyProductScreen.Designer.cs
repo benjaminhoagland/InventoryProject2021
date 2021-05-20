@@ -264,7 +264,7 @@ namespace Inventory_Management_System__BFM1_
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(70, 22);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Search";
+            this.button3.Text = "";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // textBox7

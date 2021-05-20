@@ -10,7 +10,7 @@ namespace Inventory_Management_System__BFM1_
     public class Product : Part
     {
         private static int productGUIDCounter = 0;
-        public BindingList<Part> AssociatedParts { get; set; } = new BindingList<Part>();
+        public BindingList<Product> AssociatedParts { get; set; } = new BindingList<Product>();
         public int ProductID { get; private set; } // private set during construction
         public int PartID { get; set; }
         public string Name { get; set; }
@@ -34,7 +34,7 @@ namespace Inventory_Management_System__BFM1_
             
             Inventory.addPart(this);
         }
-        public Product(int partID, string name, decimal price, int instock, int min, int max, string loc, BindingList<Part> associatedParts)
+        public Product(int partID, string name, decimal price, int instock, int min, int max, string loc, int[] associatedPartIDs)
         {
             ProductID = partID; // Product.GetNewGUID();
             PartID = partID;
@@ -45,8 +45,31 @@ namespace Inventory_Management_System__BFM1_
             Max = max;
             Location = loc;
 
-            AssociatedParts = associatedParts;
+            foreach (int id in associatedPartIDs)
+            {
+                this.addAssociatedPart(Inventory.lookupPart(id));
+            }    
             Inventory.addProduct(this);
+        }
+
+        public void addAssociatedPart(Product insertPart)
+        {
+            if (AssociatedParts.Count == 0)
+            {
+                AssociatedParts.Add(insertPart);
+                return;
+            }
+
+            foreach (Product loopPart in AssociatedParts)
+            {
+                if (insertPart.PartID <= loopPart.PartID)
+                {
+                    AssociatedParts.Insert(AssociatedParts.IndexOf(loopPart), insertPart);
+                    return;
+                }
+
+            }
+            AssociatedParts.Add(insertPart);
         }
 
         public static int GetNewGUID()

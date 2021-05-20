@@ -35,23 +35,23 @@ namespace Inventory_Management_System__BFM1_
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchpartbutton = new System.Windows.Forms.Button();
+            this.searchpartstextbox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.partsgrid = new System.Windows.Forms.DataGridView();
             this.button10 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.productgrid = new System.Windows.Forms.DataGridView();
+            this.productsgrid = new System.Windows.Forms.DataGridView();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.searchprodbutton = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.searchproductstextbox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.partsgrid)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productgrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsgrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -116,37 +116,37 @@ namespace Inventory_Management_System__BFM1_
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button2
+            // searchpartbutton
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(210, 25);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 22);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Search";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.searchpartbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchpartbutton.Location = new System.Drawing.Point(210, 25);
+            this.searchpartbutton.Name = "searchpartbutton";
+            this.searchpartbutton.Size = new System.Drawing.Size(50, 22);
+            this.searchpartbutton.TabIndex = 2;
+            this.searchpartbutton.Text = "Search";
+            this.searchpartbutton.UseVisualStyleBackColor = true;
+            this.searchpartbutton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // textBox1
+            // searchpartstextbox
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(15, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.searchpartstextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchpartstextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchpartstextbox.Location = new System.Drawing.Point(15, 26);
+            this.searchpartstextbox.Name = "searchpartstextbox";
+            this.searchpartstextbox.Size = new System.Drawing.Size(189, 20);
+            this.searchpartstextbox.TabIndex = 1;
+            this.searchpartstextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.searchpartstextbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.partsgrid);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.searchpartbutton);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.searchpartstextbox);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(10, 43);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(10);
@@ -178,13 +178,13 @@ namespace Inventory_Management_System__BFM1_
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.productgrid);
+            this.groupBox2.Controls.Add(this.productsgrid);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.searchprodbutton);
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.button11);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.searchproductstextbox);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(497, 43);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10);
@@ -194,13 +194,13 @@ namespace Inventory_Management_System__BFM1_
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Products";
             // 
-            // productgrid
+            // productsgrid
             // 
-            this.productgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productgrid.Location = new System.Drawing.Point(15, 52);
-            this.productgrid.Name = "productgrid";
-            this.productgrid.Size = new System.Drawing.Size(459, 427);
-            this.productgrid.TabIndex = 7;
+            this.productsgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productsgrid.Location = new System.Drawing.Point(15, 52);
+            this.productsgrid.Name = "productsgrid";
+            this.productsgrid.Size = new System.Drawing.Size(459, 427);
+            this.productsgrid.TabIndex = 7;
             // 
             // button6
             // 
@@ -211,6 +211,7 @@ namespace Inventory_Management_System__BFM1_
             this.button6.TabIndex = 3;
             this.button6.Text = "Clear";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -222,15 +223,16 @@ namespace Inventory_Management_System__BFM1_
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // searchprodbutton
             // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(210, 25);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(50, 22);
-            this.button8.TabIndex = 2;
-            this.button8.Text = "Search";
-            this.button8.UseVisualStyleBackColor = true;
+            this.searchprodbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchprodbutton.Location = new System.Drawing.Point(210, 25);
+            this.searchprodbutton.Name = "searchprodbutton";
+            this.searchprodbutton.Size = new System.Drawing.Size(50, 22);
+            this.searchprodbutton.TabIndex = 2;
+            this.searchprodbutton.Text = "Search";
+            this.searchprodbutton.UseVisualStyleBackColor = true;
+            this.searchprodbutton.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
@@ -254,15 +256,15 @@ namespace Inventory_Management_System__BFM1_
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // textBox2
+            // searchproductstextbox
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(15, 26);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(189, 20);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.searchproductstextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchproductstextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchproductstextbox.Location = new System.Drawing.Point(15, 26);
+            this.searchproductstextbox.Name = "searchproductstextbox";
+            this.searchproductstextbox.Size = new System.Drawing.Size(189, 20);
+            this.searchproductstextbox.TabIndex = 1;
+            this.searchproductstextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MainScreen
             // 
@@ -282,7 +284,7 @@ namespace Inventory_Management_System__BFM1_
             ((System.ComponentModel.ISupportInitialize)(this.partsgrid)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productgrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsgrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,19 +298,19 @@ namespace Inventory_Management_System__BFM1_
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button searchpartbutton;
+        private System.Windows.Forms.TextBox searchpartstextbox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.DataGridView partsgrid;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView productgrid;
+        private System.Windows.Forms.DataGridView productsgrid;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button searchprodbutton;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox searchproductstextbox;
     }
 }
 

@@ -56,7 +56,7 @@ namespace Inventory_Management_System__BFM1_
                     MessageBox.Show($"Product already exists, adding Inventory field to Instock quantity.");
                     Inventory_Management_System__BFM1_.Inventory.lookupPart(id).InStock += int.Parse(Inventory.Text);
                     var mainscreen = Application.OpenForms[0] as MainScreen;
-                    mainscreen.UpdateRefresh();
+                    mainscreen.UpdateRefreshParts();
                     this.Close();
                     return;
                 }
@@ -70,7 +70,7 @@ namespace Inventory_Management_System__BFM1_
                     int.Parse(Min.Text),
                     int.Parse(Max.Text),
                     location.Text
-                ) ;
+                );
                 this.Close();
                 return;
             }

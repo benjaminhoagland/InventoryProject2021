@@ -21,23 +21,24 @@ namespace Inventory_Management_System__BFM1_
 
         }
 
-        public void UpdateRefresh()
+        public void UpdateRefreshParts()
         {
-            if(ValidatePartSearch())
-            { 
-                partsgrid.Update();
-                partsgrid.Refresh();
-            }
+            partsgrid.Update();
+            partsgrid.Refresh();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        public void UpdateRefreshProducts()
+        {
+            productsgrid.Update();
+            productsgrid.Refresh();
+        }
+private void button1_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
+            searchpartstextbox.Text = "";
             partsgrid.ClearSelection();
         }
 
@@ -48,10 +49,10 @@ namespace Inventory_Management_System__BFM1_
         private void button2_Click(object sender, EventArgs e)
         {
             partsgrid.ClearSelection();
-            UpdateRefresh();
             if (ValidatePartSearch())
             {
-                var id = int.Parse(textBox1.Text);
+                UpdateRefreshParts();
+                var id = int.Parse(searchpartstextbox.Text);
                 var part = Inventory.lookupPart(id);
                 partsgrid.Rows[part.ProductID - 1].Selected = true;
             }
@@ -63,7 +64,7 @@ namespace Inventory_Management_System__BFM1_
         {
             try
             {
-                var id = int.Parse(textBox1.Text);
+                var id = int.Parse(searchpartstextbox.Text);
                 var part = Inventory.lookupPart(id);
                 // System.Windows.Forms.MessageBox.Show(part.PartID.ToString());
                 if (part == null)
@@ -75,12 +76,38 @@ namespace Inventory_Management_System__BFM1_
             }
             catch (FormatException excp)
             {
-                System.Windows.Forms.MessageBox.Show(excp.Message + "\nPlease search by part ID");
+                System.Windows.Forms.MessageBox.Show(excp.Message + "\n" + excp.StackTrace + "\nPlease search by part ID");
                 return false;
             }
             catch (Exception nully)
             {
                 System.Windows.Forms.MessageBox.Show("Part number not found not found in Parts, please try again.");
+                return false;
+            }
+            return true;
+        }
+        private bool ValidateProductSearch()
+        {
+            try
+            {
+                var id = int.Parse(searchproductstextbox.Text);
+                var prod = Inventory.lookupProduct(id);
+                // System.Windows.Forms.MessageBox.Show(part.PartID.ToString());
+                if (prod == null)
+                {
+                    MessageBox.Show("Product number not found not found in Products, please try again.");
+                    return false;
+                }
+
+            }
+            catch (FormatException excp)
+            {
+                System.Windows.Forms.MessageBox.Show(excp.Message + "\nPlease search by product ID");
+                return false;
+            }
+            catch (Exception nully)
+            {
+                System.Windows.Forms.MessageBox.Show("Product number not found not found in Product, please try again.");
                 return false;
             }
             return true;
@@ -134,16 +161,18 @@ namespace Inventory_Management_System__BFM1_
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            // pupulate some products to be displayed
-            new Product(1, "Engine", 100, 1, 5, 40);
-            new Product(2, "Wheel", 6, 1, 5, 40);
-            new Product(3, "Chassis", 15, 1, 5, 40);
-            new Product(4, "Axel", 8, 1, 2, 20);
-            new Product(5, "Leather Interior", 20, 1, 5, 10);
-            new Product(6, "Red Paint", 4, 1, 5, 40);
-            new Product(7, "Blue Paint", 4, 1, 5, 40);
-            new Product(8, "Yellow Paint", 4, 1, 5, 40);
-            // System.Windows.Forms.MessageBox.Show(Inventory.Products.Count.ToString());
+            // pupulate some pars to be displayed
+            new Product(1, "Engine", 100, 1, 1, 40);
+            new Product(2, "Wheel", 6, 1, 1, 40);
+            new Product(3, "Chassis", 15, 1, 1, 40);
+            new Product(4, "Axel", 8, 1, 1, 20);
+            new Product(5, "Leather Interior", 20, 1, 1, 10);
+            new Product(6, "Red Paint", 4, 1, 1, 40);
+            new Product(7, "Blue Paint", 4, 1, 1, 40);
+            new Product(8, "Yellow Paint", 4, 1, 1, 40);
+            
+            
+            // debug only: System.Windows.Forms.MessageBox.Show(Inventory.Products.Count.ToString());
             partsgrid.DataSource = Inventory.AllParts;
             foreach(DataGridViewColumn column in partsgrid.Columns)
             {
@@ -157,6 +186,25 @@ namespace Inventory_Management_System__BFM1_
             partsgrid.Columns["Min"].Visible = true;
             partsgrid.Columns["Max"].Visible = true;
             partsgrid.Columns["InHouse"].Visible = true;
+
+            // populate some items to fill productsgrid
+            new Product(1, "Red Car", 300, 1, 1, 3, "1", new int[] { 1, 2, 3, 4, 5, 6 });
+            new Product(2, "Blue Car", 300, 1, 1, 3, "1", new int[] { 1, 2, 3, 4, 5, 7 });
+            new Product(3, "Yellow Car", 300, 1, 1, 3, "1", new int[] { 1, 2, 3, 4, 5, 8 });
+            productsgrid.DataSource = Inventory.Products;
+            foreach (DataGridViewColumn column in productsgrid.Columns)
+            {
+                column.Visible = false;
+            }
+            productsgrid.Columns["ProductID"].Visible = true;
+            productsgrid.Columns["PartID"].Visible = false;
+            productsgrid.Columns["Name"].Visible = true;
+            productsgrid.Columns["Price"].Visible = true;
+            productsgrid.Columns["Instock"].Visible = true;
+            productsgrid.Columns["Min"].Visible = true;
+            productsgrid.Columns["Max"].Visible = true;
+            productsgrid.Columns["InHouse"].Visible = true;
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -164,6 +212,26 @@ namespace Inventory_Management_System__BFM1_
             foreach (DataGridViewRow row in partsgrid.SelectedRows)
                 Inventory.deletePart(row.DataBoundItem as Product);
                 //  System.Windows.Forms.MessageBox.Show(row.DataBoundItem.ToString());
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            productsgrid.ClearSelection();
+            
+            if (ValidateProductSearch())
+            {
+                UpdateRefreshProducts();
+                var id = int.Parse(searchproductstextbox.Text);
+                var prod = Inventory.lookupProduct(id);
+                productsgrid.Rows[prod.ProductID - 1].Selected = true;
+            }
+            return;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            searchproductstextbox.Text = "";
+            productsgrid.ClearSelection();
         }
     }
 }
