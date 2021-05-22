@@ -164,7 +164,7 @@ namespace Inventory_Management_System__BFM1_
         }
         private void partid_TextChanged(object sender, EventArgs e)
         {
-            partid.BackColor = String.IsNullOrEmpty(partid.Text) ? Color.LightSalmon : Color.LightSalmon;
+            partid.BackColor = String.IsNullOrEmpty(partid.Text) ? Color.Silver : Color.Silver;
         }
         private void PartName_TextChanged(object sender, EventArgs e)
         {

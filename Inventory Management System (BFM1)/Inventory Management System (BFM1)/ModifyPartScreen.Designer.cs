@@ -239,7 +239,7 @@ namespace Inventory_Management_System__BFM1_
             // 
             // partid
             // 
-            this.partid.BackColor = System.Drawing.Color.LightSalmon;
+            this.partid.BackColor = System.Drawing.Color.Silver;
             this.partid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.partid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partid.Location = new System.Drawing.Point(99, 61);

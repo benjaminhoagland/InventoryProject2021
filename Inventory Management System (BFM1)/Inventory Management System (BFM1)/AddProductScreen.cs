@@ -39,6 +39,9 @@ namespace Inventory_Management_System__BFM1_
         {
             assocpartsgrid.DataSource = assocParts;
 
+            assocpartsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            availpartsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             availParts = Inventory_Management_System__BFM1_.Inventory.NewBindingListFromOld(Inventory_Management_System__BFM1_.Inventory.AllParts);
 
@@ -338,7 +341,7 @@ namespace Inventory_Management_System__BFM1_
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // remove assoicated
+            // move associated to available
             int id = -1;
 
             if (assocpartsgrid.SelectedRows.Count != 1)
@@ -346,24 +349,34 @@ namespace Inventory_Management_System__BFM1_
                 MessageBox.Show($"Please select a single row and try again.");
                 return;
             }
-            try
+            DialogResult res = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+            if (res == DialogResult.Yes)
             {
-                id = int.Parse(assocpartsgrid.SelectedRows[0].Cells[0].Value.ToString());
-                var part = Inventory_Management_System__BFM1_.Inventory.lookupPart(id);
+                try
+                {
+                    id = int.Parse(assocpartsgrid.SelectedRows[0].Cells[0].Value.ToString());
+                    var part = Inventory_Management_System__BFM1_.Inventory.lookupPart(id);
 
-                assocParts.Remove(part);
-                assocpartsgrid.Update();
-                assocpartsgrid.Refresh();
+                    assocParts.Remove(part);
+                    assocpartsgrid.Update();
+                    assocpartsgrid.Refresh();
 
-                availParts.Add(part);
-                availpartsgrid.Refresh();
-                availpartsgrid.Refresh();
+                    availParts.Add(part);
+                    availpartsgrid.Refresh();
+                    availpartsgrid.Refresh();
+                }
+                catch
+                {
+                    MessageBox.Show($"Part number {id} was not found not found in Parts, please try again.");
+                    return;
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show($"Part number {id} was not found not found in Parts, please try again.");
                 return;
             }
+            
         }
 
         private void button2_Click_1(object sender, EventArgs e)

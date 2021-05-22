@@ -57,6 +57,11 @@ namespace Inventory_Management_System__BFM1_
             var assocParts = selected.AssociatedParts;
             assocpartsgrid.DataSource = assocParts;
 
+            assocpartsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            availpartsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+
             availParts = Inventory_Management_System__BFM1_.Inventory.NewBindingListFromOld(Inventory_Management_System__BFM1_.Inventory.AllParts);
             foreach (var item in assocParts)
             {
@@ -200,7 +205,7 @@ namespace Inventory_Management_System__BFM1_
         }
         private void partid_TextChanged(object sender, EventArgs e)
         {
-            productid.BackColor = String.IsNullOrEmpty(productid.Text) ? Color.LightSalmon : Color.LightSalmon;
+            productid.BackColor = String.IsNullOrEmpty(productid.Text) ? Color.Silver : Color.Silver;
         }
         private void PartName_TextChanged(object sender, EventArgs e)
         {
@@ -334,14 +339,18 @@ namespace Inventory_Management_System__BFM1_
         private void button6_Click(object sender, EventArgs e)
         {
             // move associated to available
-
-            int id = -1;
-
             if (assocpartsgrid.SelectedRows.Count != 1)
             {
                 MessageBox.Show($"Please select a single row and try again.");
                 return;
             }
+            DialogResult res = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+            if (res == DialogResult.Yes)
+            {
+
+            int id = -1;
+
             try
             {
                 id = int.Parse(assocpartsgrid.SelectedRows[0].Cells[0].Value.ToString());
@@ -352,6 +361,12 @@ namespace Inventory_Management_System__BFM1_
             catch
             {
                 MessageBox.Show($"Part number {id} was not found not found in Parts, please try again.");
+                return;
+            }
+
+            }
+            else
+            {
                 return;
             }
 

@@ -115,6 +115,10 @@ namespace Inventory_Management_System__BFM1_
                         throw new Exception("Inventory must be between Min and Max.");
                         
                     }
+                    if (max < min)
+                    {
+                        throw new Exception("Min must be lower than max.");
+                    }
                 }
                 catch (FormatException excp)
                 {

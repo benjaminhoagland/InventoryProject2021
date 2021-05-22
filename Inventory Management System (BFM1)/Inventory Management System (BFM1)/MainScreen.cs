@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace Inventory_Management_System__BFM1_
 {
@@ -228,13 +229,34 @@ private void button1_Click(object sender, EventArgs e)
             productsgrid.Columns["Max"].Visible = true;
             // productsgrid.Columns["InHouse"].Visible = true;
 
+
+            partsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            productsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in partsgrid.SelectedRows)
-                Inventory.deletePart(row.DataBoundItem as Product);
-                //  System.Windows.Forms.MessageBox.Show(row.DataBoundItem.ToString());
+            if (partsgrid.SelectedRows.Count != 1)
+            {
+                MessageBox.Show($"Please select a single row and try again.");
+                return;
+            }
+
+            DialogResult res = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+            if (res == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in partsgrid.SelectedRows)
+                    Inventory.deletePart(row.DataBoundItem as Product);
+                    //  System.Windows.Forms.MessageBox.Show(row.DataBoundItem.ToString());
+            }
+            else
+            {
+                return;
+            }
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -266,10 +288,41 @@ private void button1_Click(object sender, EventArgs e)
 
         private void button7_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in productsgrid.SelectedRows)
+            if (productsgrid.SelectedRows.Count != 1)
             {
-                Inventory.removeProduct(int.Parse(row.Cells[0].Value.ToString()));
+                MessageBox.Show($"Please select a single row and try again.");
+                return;
             }
+            // get part
+            // if associateparts > 0 dont delete
+            Product product = productsgrid.SelectedRows[0].DataBoundItem as Product;
+            if (product.AssociatedParts.Count > 0)
+            {
+                MessageBox.Show("Please remove associated parts and then delete the item.");
+                return;
+            }
+
+            DialogResult res = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+            if (res == DialogResult.Yes)
+            {
+                
+                foreach (DataGridViewRow row in productsgrid.SelectedRows)
+                {
+                    Inventory.removeProduct(int.Parse(row.Cells[0].Value.ToString()));
+                }
+            }
+            else
+            {
+                return;
+            }
+
+
+        }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }
