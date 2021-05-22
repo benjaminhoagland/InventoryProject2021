@@ -33,8 +33,7 @@ namespace Inventory_Management_System__BFM1_
         }
         public static bool removeProduct(int productID)
         {
-            // define
-            return true;
+            return Products.Remove(lookupProduct(productID));
         }
         public static Product lookupProduct(int productID)
         {
@@ -79,5 +78,14 @@ namespace Inventory_Management_System__BFM1_
             // define
         }
 
+        public static BindingList<Product> NewBindingListFromOld (BindingList<Product> oldList)
+        {
+            var newList = new BindingList<Product>();
+            foreach (var item in oldList)
+            {
+                newList.Add(item);
+            }
+            return newList;
+        }
     }
 }

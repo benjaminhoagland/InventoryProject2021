@@ -54,7 +54,14 @@ private void button1_Click(object sender, EventArgs e)
                 UpdateRefreshParts();
                 var id = int.Parse(searchpartstextbox.Text);
                 var part = Inventory.lookupPart(id);
-                partsgrid.Rows[part.ProductID - 1].Selected = true;
+                try
+                {
+                    partsgrid.Rows[SearchFor.PartInDataGridView(part, partsgrid)].Selected = true;
+                }
+                catch
+                {
+                    MessageBox.Show($"Part number {id} was not found not found in Parts, please try again.");
+                }
             }
             return;
             
@@ -76,7 +83,7 @@ private void button1_Click(object sender, EventArgs e)
             }
             catch (FormatException excp)
             {
-                System.Windows.Forms.MessageBox.Show(excp.Message + "\n" + excp.StackTrace + "\nPlease search by part ID");
+                System.Windows.Forms.MessageBox.Show("Please search by part ID");
                 return false;
             }
             catch (Exception nully)
@@ -102,7 +109,7 @@ private void button1_Click(object sender, EventArgs e)
             }
             catch (FormatException excp)
             {
-                System.Windows.Forms.MessageBox.Show(excp.Message + "\nPlease search by product ID");
+                System.Windows.Forms.MessageBox.Show("Please search by product ID");
                 return false;
             }
             catch (Exception nully)
@@ -118,12 +125,26 @@ private void button1_Click(object sender, EventArgs e)
             partsScreen.ShowDialog();
         }
 
-        public Product GetSelectedProduct()
+        public Product GetSelectedPart()
         {
             int selected = partsgrid.SelectedRows.Count;
             if (selected == 1)
             {
-                var prod = partsgrid.SelectedRows[0].DataBoundItem as Product;
+                var part = partsgrid.SelectedRows[0].DataBoundItem as Product;
+                return part;
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Warning: no part is selected.");
+                return null;
+            }
+        }
+        public Product GetSelectedProduct()
+        {
+            int selected = productsgrid.SelectedRows.Count;
+            if (selected == 1)
+            {
+                var prod = productsgrid.SelectedRows[0].DataBoundItem as Product;
                 return prod;
             }
             else
@@ -134,30 +155,31 @@ private void button1_Click(object sender, EventArgs e)
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            int selected = partsgrid.SelectedRows.Count;
-            if (selected == 1)
+            if(partsgrid.SelectedRows.Count != 1)
             {
-                Form modifyPart = new ModifyPartScreen();
-                modifyPart.ShowDialog();
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("Please select a single part and try again.");
+                MessageBox.Show("Please select a single row and try again.");
                 return;
             }
+            Form modifyPart = new ModifyPartScreen();
+            modifyPart.ShowDialog();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            // Form productScreen = new AddProductScreen();
-            // productScreen.ShowDialog();
-            // flag add stuff here
+            Form productScreen = new AddProductScreen();
+            productScreen.ShowDialog();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            // Form modifyProductScreen = new ModifyProductScreen();
-            // modifyProductScreen.ShowDialog();
+            if(productsgrid.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Please select a single row and try again.");
+                return;
+            }
+            
+            Form modifyProductScreen = new ModifyProductScreen();
+            modifyProductScreen.ShowDialog();
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -186,12 +208,12 @@ private void button1_Click(object sender, EventArgs e)
             partsgrid.Columns["Instock"].Visible = true;
             partsgrid.Columns["Min"].Visible = true;
             partsgrid.Columns["Max"].Visible = true;
-            partsgrid.Columns["InHouse"].Visible = true;
+            // partsgrid.Columns["InHouse"].Visible = true;
 
             // populate some items to fill productsgrid
-            new Product(1, "Red Car", 300, 1, 1, 3, "1", new int[] { 1, 2, 3, 4, 5, 6 });
-            new Product(2, "Blue Car", 300, 1, 1, 3, "1", new int[] { 1, 2, 3, 4, 5, 7 });
-            new Product(3, "Yellow Car", 300, 1, 1, 3, "1", new int[] { 1, 2, 3, 4, 5, 8 });
+            new Product(1, "Red Car", 300, 1, 1, 3, "1", new List<int> { 1, 2, 3, 4, 5, 6 });
+            new Product(2, "Blue Car", 300, 1, 1, 3, "1", new List<int> { 1, 2, 3, 4, 5, 7 });
+            new Product(3, "Yellow Car", 300, 1, 1, 3, "1", new List<int> { 1, 2, 3, 4, 5, 8 });
             productsgrid.DataSource = Inventory.Products;
             foreach (DataGridViewColumn column in productsgrid.Columns)
             {
@@ -204,7 +226,7 @@ private void button1_Click(object sender, EventArgs e)
             productsgrid.Columns["Instock"].Visible = true;
             productsgrid.Columns["Min"].Visible = true;
             productsgrid.Columns["Max"].Visible = true;
-            productsgrid.Columns["InHouse"].Visible = true;
+            // productsgrid.Columns["InHouse"].Visible = true;
 
         }
 
@@ -224,7 +246,14 @@ private void button1_Click(object sender, EventArgs e)
                 UpdateRefreshProducts();
                 var id = int.Parse(searchproductstextbox.Text);
                 var prod = Inventory.lookupProduct(id);
-                productsgrid.Rows[prod.ProductID - 1].Selected = true;
+                try
+                {
+                    productsgrid.Rows[SearchFor.PartInDataGridView(prod, productsgrid)].Selected = true;
+                }
+                catch
+                {
+                    MessageBox.Show($"Part number {id} was not found not found in Parts, please try again.");
+                }
             }
             return;
         }
@@ -233,6 +262,14 @@ private void button1_Click(object sender, EventArgs e)
         {
             searchproductstextbox.Text = "";
             productsgrid.ClearSelection();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in productsgrid.SelectedRows)
+            {
+                Inventory.removeProduct(int.Parse(row.Cells[0].Value.ToString()));
+            }
         }
     }
 }

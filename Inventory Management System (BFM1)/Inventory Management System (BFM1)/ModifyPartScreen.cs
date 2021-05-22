@@ -39,8 +39,8 @@ namespace Inventory_Management_System__BFM1_
 
         private void AddPartScreen_Load(object sender, EventArgs e)
         {
-            var selected = Program.mainScreen.GetSelectedProduct();
-            if (Program.mainScreen.GetSelectedProduct() != null)
+            var selected = Program.mainScreen.GetSelectedPart();
+            if (Program.mainScreen.GetSelectedPart() != null)
             {
                 partid.Text = selected.PartID.ToString();
                 PartName.Text = selected.Name.ToString();

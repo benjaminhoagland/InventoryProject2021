@@ -11,3 +11,4 @@ C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Managem
 C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory Management System (BFM1).csprojAssemblyReference.cache
 C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.AddProductScreen.resources
 C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.ModifyPartScreen.resources
+C:\Users\benho\source\repos\Inventory Management System (BFM1)\Inventory Management System (BFM1)\obj\Debug\Inventory_Management_System__BFM1_.ModifyProductScreen.resources

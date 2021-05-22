@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace Inventory_Management_System__BFM1_
 {
-    public partial class ModifyProductScreen : Form
+    public partial class AddProductScreen : Form
     {
         private string textBox6name;
         private bool inhouse = true;
-        private Product selected = null;
         private BindingList<Product> availParts = new BindingList<Product>();
-        public ModifyProductScreen()
+        private BindingList<Product> assocParts = new BindingList<Product>();
+
+        public AddProductScreen()
         {
             InitializeComponent();
         }
@@ -36,36 +37,10 @@ namespace Inventory_Management_System__BFM1_
 
         private void AddPartScreen_Load(object sender, EventArgs e)
         {
-            selected = Program.mainScreen.GetSelectedProduct();
-            if (Program.mainScreen.GetSelectedProduct() != null)
-            {
-                productid.Text = selected.ProductID.ToString();
-                ProductName.Text = selected.Name.ToString();
-                Price.Text = selected.Price.ToString();
-                Inventory.Text = selected.InStock.ToString();
-                Min.Text = selected.Min.ToString();
-                Max.Text = selected.Max.ToString();
-                location.Text = selected.Location.ToString();
-
-                // lock desired controls and send message to delete or add 
-                productid.ReadOnly = true;
-
-
-
-            }
-
-            var assocParts = selected.AssociatedParts;
             assocpartsgrid.DataSource = assocParts;
 
+
             availParts = Inventory_Management_System__BFM1_.Inventory.NewBindingListFromOld(Inventory_Management_System__BFM1_.Inventory.AllParts);
-            foreach (var item in assocParts)
-            {
-                // find and remove duplicated entires that are not available
-                if (availParts.Contains(item))
-                { 
-                    availParts.Remove(item);    
-                }
-            }
 
             availpartsgrid.DataSource = availParts;
 
@@ -104,21 +79,40 @@ namespace Inventory_Management_System__BFM1_
             if (ValidateInput())
             {
                 var id = int.Parse(productid.Text);
-                var prod = Inventory_Management_System__BFM1_.Inventory.lookupProduct(id);
+                if (Inventory_Management_System__BFM1_.Inventory.Products.Contains(Inventory_Management_System__BFM1_.Inventory.lookupProduct(id)))
+                {
+                    // product already exists
+                    MessageBox.Show($"Product already exists, adding Inventory field to Instock quantity.");
+                    Inventory_Management_System__BFM1_.Inventory.lookupProduct(id).InStock += int.Parse(Inventory.Text);
+                    var mainscreen = Application.OpenForms[0] as MainScreen;
+                    mainscreen.UpdateRefreshProducts();
+                    this.Close();
+                    return;
+                }
 
-                // note that modify part cannot change partid
-                prod.Name = ProductName.Text;
-                prod.Price = int.Parse(Price.Text);
-                prod.InStock = int.Parse(Inventory.Text);
-                prod.Min = int.Parse(Min.Text);
-                prod.Max = int.Parse(Max.Text);
-                prod.Location = location.Text;
 
+                if (assocParts.Count < 1)
+                {
+                    MessageBox.Show("Please add at least one associated part, and submit again.");
+                    return;
+                }
 
-                var mainscreen = Application.OpenForms[0] as MainScreen;
-                mainscreen.UpdateRefreshProducts();
+                new Product
+                (
+                    int.Parse(productid.Text),
+                    productname.Text,
+                    int.Parse(Price.Text),
+                    int.Parse(Inventory.Text),
+                    int.Parse(Min.Text),
+                    int.Parse(Max.Text),
+                    location.Text,
+                    // list associated parts
+                    Product.BuildPartIDListFromProducts(assocParts)
+                ) ;
+                
                 this.Close();
                 return;
+                
             }
         }
 
@@ -132,6 +126,7 @@ namespace Inventory_Management_System__BFM1_
                 {
                     textBox.Focus();
 
+                    // remove "txt" prefix:
                     if (textBox.Name == "textBox6")
                     {
                         var fieldName = label7.Text;
@@ -200,11 +195,11 @@ namespace Inventory_Management_System__BFM1_
         }
         private void partid_TextChanged(object sender, EventArgs e)
         {
-            productid.BackColor = String.IsNullOrEmpty(productid.Text) ? Color.LightSalmon : Color.LightSalmon;
+            productid.BackColor = String.IsNullOrEmpty(productid.Text) ? Color.LightSalmon : Color.White;
         }
         private void PartName_TextChanged(object sender, EventArgs e)
         {
-            ProductName.BackColor = String.IsNullOrEmpty(ProductName.Text) ? Color.LightSalmon : Color.White;
+            productname.BackColor = String.IsNullOrEmpty(productname.Text) ? Color.LightSalmon : Color.White;
         }
 
         private void Inventory_TextChanged(object sender, EventArgs e)
@@ -230,6 +225,21 @@ namespace Inventory_Management_System__BFM1_
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             location.BackColor = String.IsNullOrEmpty(location.Text) ? Color.LightSalmon : Color.White;
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void searchprodbutton_Click(object sender, EventArgs e)
@@ -326,15 +336,9 @@ namespace Inventory_Management_System__BFM1_
             return true;
         }
 
-        private void availpartsgrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
-            // move associated to available
-
+            // remove assoicated
             int id = -1;
 
             if (assocpartsgrid.SelectedRows.Count != 1)
@@ -346,24 +350,25 @@ namespace Inventory_Management_System__BFM1_
             {
                 id = int.Parse(assocpartsgrid.SelectedRows[0].Cells[0].Value.ToString());
                 var part = Inventory_Management_System__BFM1_.Inventory.lookupPart(id);
-                selected.removeAssoicatedPart(id);
+
+                assocParts.Remove(part);
+                assocpartsgrid.Update();
+                assocpartsgrid.Refresh();
+
                 availParts.Add(part);
+                availpartsgrid.Refresh();
+                availpartsgrid.Refresh();
             }
             catch
             {
                 MessageBox.Show($"Part number {id} was not found not found in Parts, please try again.");
                 return;
             }
-
-
-            //selected.removeAssoicatedPart(PartID);
-
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            // move available to associated
-
+            // add associated
             int id = -1;
 
             if (availpartsgrid.SelectedRows.Count != 1)
@@ -375,14 +380,25 @@ namespace Inventory_Management_System__BFM1_
             {
                 id = int.Parse(availpartsgrid.SelectedRows[0].Cells[0].Value.ToString());
                 var part = Inventory_Management_System__BFM1_.Inventory.lookupPart(id);
-                selected.addAssociatedPart(part);
+
+                assocParts.Add(part);
+                assocpartsgrid.Update();
+                assocpartsgrid.Refresh();
+
                 availParts.Remove(part);
+                availpartsgrid.Refresh();
+                availpartsgrid.Refresh();
             }
             catch
             {
                 MessageBox.Show($"Part number {id.ToString()} was not found not found in Parts, please try again.");
                 return;
             }
+        }
+
+        private void availpartsgrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

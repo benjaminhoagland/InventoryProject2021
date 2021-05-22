@@ -222,6 +222,7 @@ namespace Inventory_Management_System__BFM1_
             this.button7.TabIndex = 6;
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // searchprodbutton
             // 

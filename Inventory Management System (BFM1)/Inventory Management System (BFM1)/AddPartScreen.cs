@@ -53,7 +53,7 @@ namespace Inventory_Management_System__BFM1_
                 if (Inventory_Management_System__BFM1_.Inventory.AllParts.Contains(Inventory_Management_System__BFM1_.Inventory.lookupPart(id)))
                 {
                     // product already exists
-                    MessageBox.Show($"Product already exists, adding Inventory field to Instock quantity.");
+                    MessageBox.Show($"Part already exists, adding Inventory field to Instock quantity.");
                     Inventory_Management_System__BFM1_.Inventory.lookupPart(id).InStock += int.Parse(Inventory.Text);
                     var mainscreen = Application.OpenForms[0] as MainScreen;
                     mainscreen.UpdateRefreshParts();
@@ -118,7 +118,7 @@ namespace Inventory_Management_System__BFM1_
                 }
                 catch (FormatException excp)
                 {
-                    System.Windows.Forms.MessageBox.Show($"\nPlease enter a number for ID, Price, Inventory, Min, and Max.");
+                    System.Windows.Forms.MessageBox.Show($"Please enter a number for ID, Price, Inventory, Min, and Max.");
                     return false;
                 }
                 catch (Exception e)
@@ -134,7 +134,7 @@ namespace Inventory_Management_System__BFM1_
                     }
                     catch (FormatException e)
                     {
-                        System.Windows.Forms.MessageBox.Show(e.Message + $"\nPlease enter a NUMBER for {label7.Text}");
+                        System.Windows.Forms.MessageBox.Show($"Please enter a NUMBER for {label7.Text}");
                         return false;
                     }
                 }
@@ -146,7 +146,7 @@ namespace Inventory_Management_System__BFM1_
                     }
                     catch (FormatException e)
                     {
-                        System.Windows.Forms.MessageBox.Show(e.Message + $"\nPlease enter a NAME for {label7.Text}");
+                        System.Windows.Forms.MessageBox.Show($"Please enter a NAME for {label7.Text}");
                         return false;
                     }
                 }

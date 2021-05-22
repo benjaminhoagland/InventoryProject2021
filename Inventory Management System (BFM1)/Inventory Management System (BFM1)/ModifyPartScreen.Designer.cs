@@ -59,9 +59,9 @@ namespace Inventory_Management_System__BFM1_
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
+            this.label1.Size = new System.Drawing.Size(88, 20);
             this.label1.TabIndex = 1001;
-            this.label1.Text = "Modify";
+            this.label1.Text = "Modify Part";
             // 
             // radioButton1
             // 
@@ -307,7 +307,7 @@ namespace Inventory_Management_System__BFM1_
             this.MinimizeBox = false;
             this.Name = "ModifyPartScreen";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Modify Parts";
+            this.Text = "Modify Part";
             this.Load += new System.EventHandler(this.AddPartScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
