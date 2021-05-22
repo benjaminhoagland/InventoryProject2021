@@ -68,29 +68,19 @@ namespace Inventory_Management_System__BFM1_
             if (ValidateInput())
             {
                 var id = int.Parse(partid.Text);
-                // flag this check will always return true, because we already selected an existing partid to open the modify  window
-                // the logic needs to be updated to import input values into the selected product object belonging to partid
-                if (Inventory_Management_System__BFM1_.Inventory.AllParts.Contains(Inventory_Management_System__BFM1_.Inventory.lookupPart(id)))
-                {
-                    // product already exists
-                    MessageBox.Show($"Product already exists, adding Inventory field to Instock quantity.");
-                    Inventory_Management_System__BFM1_.Inventory.lookupPart(id).InStock += int.Parse(Inventory.Text);
-                    var mainscreen = Application.OpenForms[0] as MainScreen;
-                    mainscreen.UpdateRefreshParts();
-                    this.Close();
-                    return;
-                }
+                var part = Inventory_Management_System__BFM1_.Inventory.lookupPart(id);
 
-                new Product
-                (
-                    int.Parse(partid.Text),
-                    PartName.Text,
-                    int.Parse(Price.Text),
-                    int.Parse(Inventory.Text),
-                    int.Parse(Min.Text),
-                    int.Parse(Max.Text),
-                    location.Text
-                );
+                // note that modify part cannot change partid
+                part.Name = PartName.Text;
+                part.Price = int.Parse(Price.Text);
+                part.InStock = int.Parse(Inventory.Text);
+                part.Min = int.Parse(Min.Text);
+                part.Max = int.Parse(Max.Text);
+                part.Location = location.Text;
+
+
+                var mainscreen = Application.OpenForms[0] as MainScreen;
+                mainscreen.UpdateRefreshParts();
                 this.Close();
                 return;
             }
