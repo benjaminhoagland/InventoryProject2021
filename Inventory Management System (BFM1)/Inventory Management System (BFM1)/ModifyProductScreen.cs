@@ -22,16 +22,20 @@ namespace Inventory_Management_System__BFM1_
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            /*
             label7.Text = "Machine ID";
             inhouse = true;
             textBox6name = label7.Text;
+            */
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
+            /*
             label7.Text = "Company Name";
             inhouse = false;
             textBox6name = label7.Text;
+            */
         }
 
         private void AddPartScreen_Load(object sender, EventArgs e)
@@ -41,11 +45,11 @@ namespace Inventory_Management_System__BFM1_
             {
                 productid.Text = selected.ProductID.ToString();
                 ProductName.Text = selected.Name.ToString();
-                Price.Text = selected.Price.ToString();
+                Price.Text = selected.Price.ToString("F");
                 Inventory.Text = selected.InStock.ToString();
                 Min.Text = selected.Min.ToString();
                 Max.Text = selected.Max.ToString();
-                location.Text = selected.Location.ToString();
+                // location.Text = selected.Location.ToString();
 
                 // lock desired controls and send message to delete or add 
                 productid.ReadOnly = true;
@@ -113,11 +117,13 @@ namespace Inventory_Management_System__BFM1_
 
                 // note that modify part cannot change partid
                 prod.Name = ProductName.Text;
-                prod.Price = int.Parse(Price.Text);
+                var price = decimal.Parse(Price.Text, System.Globalization.CultureInfo.InvariantCulture);
+                var parsedDecimal = price.ToString("F");
+                prod.Price = decimal.Parse(parsedDecimal);
                 prod.InStock = int.Parse(Inventory.Text);
                 prod.Min = int.Parse(Min.Text);
                 prod.Max = int.Parse(Max.Text);
-                prod.Location = location.Text;
+                // prod.Location = location.Text;
 
 
                 var mainscreen = Application.OpenForms[0] as MainScreen;
@@ -139,9 +145,11 @@ namespace Inventory_Management_System__BFM1_
 
                     if (textBox.Name == "textBox6")
                     {
+                        /*
                         var fieldName = label7.Text;
                         MessageBox.Show(string.Format("'{0}' is required.", fieldName));
                         textBox.BackColor = System.Drawing.Color.LightSalmon;
+                        */
                     }
                     else
                     {
@@ -155,10 +163,12 @@ namespace Inventory_Management_System__BFM1_
                 {
                     int.Parse(productid.Text);
                     // PartName.Text;
-                    int.Parse(Price.Text);
+                    decimal.Parse(Price.Text, System.Globalization.CultureInfo.InvariantCulture);
                     var quant = int.Parse(Inventory.Text);
                     var min = int.Parse(Min.Text);
                     var max = int.Parse(Max.Text);
+                    if (min > max)
+                        throw new Exception("Max must be greater than or equal to Min.");
 
                     if ((quant < min) || (quant > max))
                     {
@@ -168,7 +178,7 @@ namespace Inventory_Management_System__BFM1_
                 }
                 catch (FormatException excp)
                 {
-                    System.Windows.Forms.MessageBox.Show($"Please enter a number for ID, Price, Inventory, Min, and Max.");
+                    MessageBox.Show($"Please enter a whole number for ID, Inventory, Min, and Max.\nPlease enter a decimal number for Price.");
                     return false;
                 }
                 catch (Exception e)
@@ -176,6 +186,7 @@ namespace Inventory_Management_System__BFM1_
                     MessageBox.Show(e.Message);
                     return false;
                 }
+                /*
                 if (inhouse)
                 {
                     try
@@ -200,6 +211,7 @@ namespace Inventory_Management_System__BFM1_
                         return false;
                     }
                 }
+                */
             }
             return true;
         }
@@ -234,7 +246,7 @@ namespace Inventory_Management_System__BFM1_
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            location.BackColor = String.IsNullOrEmpty(location.Text) ? Color.LightSalmon : Color.White;
+            // location.BackColor = String.IsNullOrEmpty(location.Text) ? Color.LightSalmon : Color.White;
         }
 
         private void searchprodbutton_Click(object sender, EventArgs e)

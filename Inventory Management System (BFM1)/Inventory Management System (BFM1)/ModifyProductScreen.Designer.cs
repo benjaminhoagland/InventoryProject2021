@@ -30,8 +30,6 @@ namespace Inventory_Management_System__BFM1_
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.ProductName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Inventory = new System.Windows.Forms.TextBox();
@@ -42,8 +40,6 @@ namespace Inventory_Management_System__BFM1_
             this.label5 = new System.Windows.Forms.Label();
             this.Max = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.location = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.submit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.productid = new System.Windows.Forms.TextBox();
@@ -76,30 +72,6 @@ namespace Inventory_Management_System__BFM1_
             this.label1.Size = new System.Drawing.Size(114, 20);
             this.label1.TabIndex = 1001;
             this.label1.Text = "Modify Product";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(14, 38);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(66, 17);
-            this.radioButton1.TabIndex = 1002;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "In-house";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(86, 38);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(80, 17);
-            this.radioButton2.TabIndex = 1003;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Outsourced";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // ProductName
             // 
@@ -205,28 +177,6 @@ namespace Inventory_Management_System__BFM1_
             this.label6.Size = new System.Drawing.Size(27, 13);
             this.label6.TabIndex = 1012;
             this.label6.Text = "Max";
-            // 
-            // location
-            // 
-            this.location.BackColor = System.Drawing.Color.LightSalmon;
-            this.location.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.location.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.location.Location = new System.Drawing.Point(99, 217);
-            this.location.Name = "location";
-            this.location.Size = new System.Drawing.Size(189, 20);
-            this.location.TabIndex = 1015;
-            this.location.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.location.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(-13, 219);
-            this.label7.Name = "label7";
-            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label7.Size = new System.Drawing.Size(106, 16);
-            this.label7.TabIndex = 1014;
-            this.label7.Text = "Company Name";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // submit
             // 
@@ -417,8 +367,6 @@ namespace Inventory_Management_System__BFM1_
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.submit);
-            this.Controls.Add(this.location);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.Max);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Min);
@@ -429,8 +377,6 @@ namespace Inventory_Management_System__BFM1_
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ProductName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -451,8 +397,6 @@ namespace Inventory_Management_System__BFM1_
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.TextBox ProductName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox Inventory;
@@ -463,8 +407,6 @@ namespace Inventory_Management_System__BFM1_
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox Max;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox location;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button submit;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox productid;

@@ -186,14 +186,14 @@ private void button1_Click(object sender, EventArgs e)
         private void MainScreen_Load(object sender, EventArgs e)
         {
             // pupulate some pars to be displayed
-            new Product(1, "Engine", 100, 1, 1, 40);
-            new Product(2, "Wheel", 6, 1, 1, 40);
-            new Product(3, "Chassis", 15, 1, 1, 40);
-            new Product(4, "Axel", 8, 1, 1, 20);
-            new Product(5, "Leather Interior", 20, 1, 1, 10);
-            new Product(6, "Red Paint", 4, 1, 1, 40);
-            new Product(7, "Blue Paint", 4, 1, 1, 40);
-            new Product(8, "Yellow Paint", 4, 1, 1, 40);
+            new Product(1, "Engine", 99.99m, 1, 1, 40);
+            new Product(2, "Wheel", 5.99m, 1, 1, 40);
+            new Product(3, "Chassis", 14.99m, 1, 1, 40);
+            new Product(4, "Axel", 7.99m, 1, 1, 20);
+            new Product(5, "Leather Interior", 19.99m, 1, 1, 10);
+            new Product(6, "Red Paint", 3.99m, 1, 1, 40);
+            new Product(7, "Blue Paint", 3.99m, 1, 1, 40);
+            new Product(8, "Yellow Paint", 3.99m, 1, 1, 40);
             
             
             // debug only: System.Windows.Forms.MessageBox.Show(Inventory.Products.Count.ToString());
@@ -212,9 +212,9 @@ private void button1_Click(object sender, EventArgs e)
             // partsgrid.Columns["InHouse"].Visible = true;
 
             // populate some items to fill productsgrid
-            new Product(1, "Red Car", 300, 1, 1, 3, "1", new List<int> { 1, 2, 3, 4, 5, 6 });
-            new Product(2, "Blue Car", 300, 1, 1, 3, "1", new List<int> { 1, 2, 3, 4, 5, 7 });
-            new Product(3, "Yellow Car", 300, 1, 1, 3, "1", new List<int> { 1, 2, 3, 4, 5, 8 });
+            new Product(1, "Red Car", 299.99m, 1, 1, 3, new List<int> { 1, 2, 3, 4, 5, 6 });
+            new Product(2, "Blue Car", 299.99m, 1, 1, 3, new List<int> { 1, 2, 3, 4, 5, 7 });
+            new Product(3, "Yellow Car", 299.99m, 1, 1, 3, new List<int> { 1, 2, 3, 4, 5, 8 });
             productsgrid.DataSource = Inventory.Products;
             foreach (DataGridViewColumn column in productsgrid.Columns)
             {

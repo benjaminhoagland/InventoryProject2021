@@ -60,17 +60,26 @@ namespace Inventory_Management_System__BFM1_
                     this.Close();
                     return;
                 }
-
-                new Product
+                var part = new Product
                 (
                     int.Parse(partid.Text),
                     PartName.Text,
-                    int.Parse(Price.Text),
+                    decimal.Parse(Price.Text, System.Globalization.CultureInfo.InvariantCulture),
                     int.Parse(Inventory.Text),
                     int.Parse(Min.Text),
-                    int.Parse(Max.Text),
-                    location.Text
+                    int.Parse(Max.Text)
                 );
+                if (radioButton1.Checked)
+                {
+                    part.MachineID = int.Parse(location.Text);
+                    part.Inhouse = true;
+                }
+                else
+                {
+                    part.Location = location.Text;
+                    part.Inhouse = false;
+
+                }
                 this.Close();
                 return;
             }
@@ -105,11 +114,10 @@ namespace Inventory_Management_System__BFM1_
                 { 
                     int.Parse(partid.Text);
                     // PartName.Text;
-                    int.Parse(Price.Text);
+                    decimal.Parse(Price.Text, System.Globalization.CultureInfo.InvariantCulture);
                     var quant = int.Parse(Inventory.Text);
                     var min = int.Parse(Min.Text);
                     var max = int.Parse(Max.Text);
-
                     if ((quant < min) || (quant > max))
                     {
                         throw new Exception("Inventory must be between Min and Max.");
@@ -122,7 +130,7 @@ namespace Inventory_Management_System__BFM1_
                 }
                 catch (FormatException excp)
                 {
-                    System.Windows.Forms.MessageBox.Show($"Please enter a number for ID, Price, Inventory, Min, and Max.");
+                    MessageBox.Show($"Please enter a whole number for ID, Inventory, Min, and Max.\nPlease enter a decimal number for Price.");
                     return false;
                 }
                 catch (Exception e)

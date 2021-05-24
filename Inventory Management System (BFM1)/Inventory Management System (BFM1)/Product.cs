@@ -18,31 +18,36 @@ namespace Inventory_Management_System__BFM1_
         public int InStock { get; set; }
         public int Min{ get; set; }
         public int Max { get; set; }
+        public int MachineID { get; set; }
         public string Location { get; set; }
         
-        public Product(int partID, string name, decimal price, int instock, int min, int max, string loc = "1")
+        public Product(int partID, string name, decimal price, int instock, int min, int max, int machineid = 1, string loc = "N/A")
         {
             ProductID = partID; // Product.GetNewGUID();
             PartID = partID;
             Name = name;
-            Price = price;
+            var parsedDecimal = price.ToString("F");
+            Price = decimal.Parse(parsedDecimal);
             InStock = instock;
             Min = min;
             Max = max;
+            MachineID = machineid;
             Location = loc;
-            
+
+            Inhouse = true;
             Inventory.addPart(this);
         }
-        public Product(int partID, string name, decimal price, int instock, int min, int max, string loc, List<int> associatedPartIDs)
+        public Product(int partID, string name, decimal price, int instock, int min, int max, List<int> associatedPartIDs)
         {
             ProductID = partID; // Product.GetNewGUID();
             PartID = partID;
             Name = name;
-            Price = price;
+            var parsedDecimal = price.ToString("F");
+            Price = decimal.Parse(parsedDecimal);
             InStock = instock;
             Min = min;
             Max = max;
-            Location = loc;
+            // Location = loc;
 
             foreach (int id in associatedPartIDs)
             {

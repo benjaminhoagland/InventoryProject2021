@@ -28,6 +28,7 @@ namespace Inventory_Management_System__BFM1_
             label7.Text = "Machine ID";
             inhouse = true;
             textBox6name = label7.Text;
+
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -35,20 +36,33 @@ namespace Inventory_Management_System__BFM1_
             label7.Text = "Company Name";
             inhouse = false;
             textBox6name = label7.Text;
+
         }
 
         private void AddPartScreen_Load(object sender, EventArgs e)
         {
             var selected = Program.mainScreen.GetSelectedPart();
+            if (selected.Inhouse == true)
+                radioButton1.Checked = true;
+            else
+                radioButton2.Checked = true;
             if (Program.mainScreen.GetSelectedPart() != null)
             {
                 partid.Text = selected.PartID.ToString();
                 PartName.Text = selected.Name.ToString();
-                Price.Text = selected.Price.ToString();
+                Price.Text = selected.Price.ToString("F");
                 Inventory.Text = selected.InStock.ToString();
                 Min.Text = selected.Min.ToString();
                 Max.Text = selected.Max.ToString();
-                location.Text = selected.Location.ToString();
+                if(inhouse)
+                {
+                    location.Text = (selected.MachineID.ToString());
+                }
+                else
+                {
+                    location.Text = selected.Location.ToString();
+
+                }
 
                 // lock desired controls and send message to delete or add 
                 partid.ReadOnly = true;
@@ -72,11 +86,24 @@ namespace Inventory_Management_System__BFM1_
 
                 // note that modify part cannot change partid
                 part.Name = PartName.Text;
-                part.Price = int.Parse(Price.Text);
+                var price = decimal.Parse(Price.Text, System.Globalization.CultureInfo.InvariantCulture);
+                var parsedDecimal = price.ToString("F");
+                part.Price = decimal.Parse(parsedDecimal);
                 part.InStock = int.Parse(Inventory.Text);
                 part.Min = int.Parse(Min.Text);
                 part.Max = int.Parse(Max.Text);
-                part.Location = location.Text;
+                
+                if(radioButton1.Checked)
+                {
+                    part.MachineID = int.Parse(location.Text);
+                    part.Inhouse = true;
+                }
+                else
+                {
+                    part.Location = location.Text;
+                    part.Inhouse = false;
+
+                }
 
 
                 var mainscreen = Application.OpenForms[0] as MainScreen;
@@ -114,7 +141,7 @@ namespace Inventory_Management_System__BFM1_
                 {
                     int.Parse(partid.Text);
                     // PartName.Text;
-                    int.Parse(Price.Text);
+                    decimal.Parse(Price.Text, System.Globalization.CultureInfo.InvariantCulture);
                     var quant = int.Parse(Inventory.Text);
                     var min = int.Parse(Min.Text);
                     var max = int.Parse(Max.Text);
@@ -127,7 +154,7 @@ namespace Inventory_Management_System__BFM1_
                 }
                 catch (FormatException excp)
                 {
-                    System.Windows.Forms.MessageBox.Show($"\nPlease enter a number for ID, Price, Inventory, Min, and Max.");
+                    MessageBox.Show($"Please enter a whole number for ID, Inventory, Min, and Max.\nPlease enter a decimal number for Price.");
                     return false;
                 }
                 catch (Exception e)
